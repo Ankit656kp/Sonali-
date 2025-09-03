@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from SONALI_MUSIC import app
 
 # 🔑 अपनी OpenAI API key यहां डालो
-OPENAI_API_KEY = "https://api.openai.com/v1/chat/completions"
+OPENAI_API_KEY = "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"
 
 def ask_ai(query):
     try:
@@ -36,7 +36,7 @@ async def ask_handler(client, message):
     reply = ask_ai(query)
 
     button = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("ᴧηsᴡєʀ ʙʏ", url="https://t.me/Sonali_music_bot")]]
+        [[InlineKeyboardButton("ᴧηsᴡєʀ ʙʏ", url="https://t.me/ZeeMusicUpdate")]]
     )
     await message.reply_text(reply, reply_markup=button)
 
@@ -50,6 +50,6 @@ async def ask_group_handler(client, message):
     reply = ask_ai(query)
 
     button = InlineKeyboardMarkup(
-        [[InlineKeyboardButton("ᴧηsᴡєʀ ʙʏ", url="https://t.me/Sonali_music_bot")]]
+        [[InlineKeyboardButton("ᴧηsᴡєʀ ʙʏ", url="https://t.me/ZeeMusicUpdate")]]
     )
     await message.reply_text(reply, reply_markup=button)
