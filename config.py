@@ -20,8 +20,8 @@ OWNER_ID = int(getenv("OWNER_ID", 6135117014))
 HEROKU_APP_NAME = getenv("HEROKU_APP_NAME")
 HEROKU_API_KEY = getenv("HEROKU_API_KEY")
 
-API_URL = getenv("API_URL", 'https://api.thequickearn.xyz') #youtube song url
-API_KEY = getenv("API_KEY", 'NxGBNexGenBotsad3e6e') # youtube song api key, get it from ht
+API_URL = getenv("API_URL", 'http://195.26.255.16:8000') #youtube song url
+API_KEY = getenv("API_KEY", 'bEw0kMCQuWQiceSbtjSG4AaH5UwDbCLUqGvWisiGDZo') # youtube song api key, get it from ht
 
 
 UPSTREAM_REPO = getenv("UPSTREAM_REPO", "https://github.com/Ankit656kp/Sonali-",)
