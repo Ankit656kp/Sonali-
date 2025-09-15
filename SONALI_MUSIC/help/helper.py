@@ -364,8 +364,8 @@ class Helper(object):
 ⊚ ʟᴧsᴛ ᴄʜєᴄᴋєᴅ ση : ᴅᴧᴛє : 02 Sept 2025
 ⊚ ᴄʜєᴄᴋєᴅ 𝖡ʏ :[𝐃𝐞𝐯𝐢𝐥](https://t.me/Ankitgupta214)
 ─────────────────────────
-❍ 𝐏ᴏᴡєʀєᴅ 𝖡ʏ » [𝐊ᴀʀᴛɪᴋ 𝐁ᴀʙʏ](https://t.me/GonnaAgree)
-❍ 𝐃єᴠʟᴏᴘєʀ.  » [𝐃𝐞𝐯𝐢𝐥 𝐁𝐨𝐬𝐬](https://t.me/Ankitgupta214)
+❍ 𝐏ᴏᴡєʀєᴅ 𝖡ʏ » [`𝑉𝑎𝑙𝑒𝑛𝑡𝑖𝑛𝑜 — ](https://t.me/Sxnpe)
+❍ 𝐃єᴠʟᴏᴘєʀ.  »  [𝐃𝐞𝐯𝐢𝐥 𝐁𝐨𝐬𝐬](https://t.me/Ankitgupta214)
 ─────────────────────────**
 '''
     HELP_ALLBOT = '''
