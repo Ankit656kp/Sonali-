@@ -122,7 +122,7 @@ class YouTubeAPI:
         for result in (await results.next())["result"]:
             duration = result["duration"]
         return duration
-        async def thumbnail(self, link: str, videoid: Union[bool, str] = None):
+    async def thumbnail(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
         if "&" in link:
@@ -138,7 +138,7 @@ class YouTubeAPI:
         if "&" in link:
             link = link.split("&")[0]
         return await get_stream_url(link, True)
-        
+
     async def audio(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
@@ -220,12 +220,7 @@ class YouTubeAPI:
                     )
         return formats_available, link
 
-    async def slider(
-        self,
-        link: str,
-        query_type: int,
-        videoid: Union[bool, str] = None,
-    ):
+    async def slider(self, link: str, query_type: int, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
         if "&" in link:
@@ -238,27 +233,20 @@ class YouTubeAPI:
         thumbnail = result[query_type]["thumbnails"][0]["url"].split("?")[0]
         return title, duration_min, thumbnail, vidid
 
-    async def download(
-        self,
-        link: str,
-        mystic,
-        video: Union[bool, str] = None,
-        videoid: Union[bool, str] = None,
-        songaudio: Union[bool, str] = None,
-        songvideo: Union[bool, str] = None,
-        format_id: Union[bool, str] = None,
-        title: Union[bool, str] = None,
-    ) -> str:
+    async def download(self, link: str, mystic, video: Union[bool, str] = None,
+                       videoid: Union[bool, str] = None, songaudio: Union[bool, str] = None,
+                       songvideo: Union[bool, str] = None, format_id: Union[bool, str] = None,
+                       title: Union[bool, str] = None) -> str:
         if videoid:
             link = self.base + link
-            
+
         if video and not songvideo:
             downloaded_file = await get_stream_url(link, True)
             return downloaded_file, None
         elif not video and not songaudio:
             downloaded_file = await get_stream_url(link, False)
             return downloaded_file, None
-        
+
         loop = asyncio.get_running_loop()
 
         def audio_dl():
@@ -347,3 +335,4 @@ class YouTubeAPI:
             downloaded_file = await loop.run_in_executor(None, audio_dl)
             direct = None
         return downloaded_file, direct
+                        
