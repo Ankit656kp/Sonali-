@@ -9,12 +9,9 @@ from pyrogram.types import Message
 from pyrogram.enums import MessageEntityType
 from youtubesearchpython.__future__ import VideosSearch
 
-from config import API_URL, API_KEY  # ✅ नया API यहाँ से लेंगे
-
 def time_to_seconds(time):
     stringt = str(time)
     return sum(int(x) * 60**i for i, x in enumerate(reversed(stringt.split(":"))))
-
 
 async def shell_cmd(cmd):
     proc = await asyncio.create_subprocess_shell(
@@ -30,21 +27,17 @@ async def shell_cmd(cmd):
             return errorz.decode("utf-8")
     return out.decode("utf-8")
 
-
 async def get_stream_url(query, video=False):
-    """
-    Updated function to use our integrated YouTube API with Telegram caching
-    """
+    api_base = "http://195.26.255.16:8000"
+    api_key = "bEw0kMCQuWQiceSbtjSG4AaH5UwDbCLUqGvWisiGDZo"
     endpoint = "/ytmp4" if video else "/ytmp3"
-    api_url = f"{API_URL}{endpoint}"
-    
+    api_url = f"{api_base}{endpoint}"
     async with httpx.AsyncClient(timeout=120) as client:
-        params = {"url": query, "api_key": API_KEY}
+        params = {"url": query, "api_key": api_key}
         try:
             response = await client.get(api_url, params=params)
             if response.status_code != 200:
                 return ""
-            
             data = response.json()
             if data.get("status") and data.get("result"):
                 return data["result"]["url"]
@@ -52,7 +45,6 @@ async def get_stream_url(query, video=False):
         except Exception as e:
             print(f"Error calling YouTube API: {e}")
             return ""
-
 
 class YouTubeAPI:
     def __init__(self):
@@ -130,8 +122,7 @@ class YouTubeAPI:
         for result in (await results.next())["result"]:
             duration = result["duration"]
         return duration
-
-    async def thumbnail(self, link: str, videoid: Union[bool, str] = None):
+        async def thumbnail(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
         if "&" in link:
@@ -147,7 +138,7 @@ class YouTubeAPI:
         if "&" in link:
             link = link.split("&")[0]
         return await get_stream_url(link, True)
-
+        
     async def audio(self, link: str, videoid: Union[bool, str] = None):
         if videoid:
             link = self.base + link
@@ -315,3 +306,44 @@ class YouTubeAPI:
                 "quiet": True,
                 "no_warnings": True,
                 "prefer_ffmpeg": True,
+                "merge_output_format": "mp4",
+            }
+            x = yt_dlp.YoutubeDL(ydl_optssx)
+            x.download([link])
+
+        def song_audio_dl():
+            fpath = f"downloads/{title}.%(ext)s"
+            ydl_optssx = {
+                "format": format_id,
+                "outtmpl": fpath,
+                "geo_bypass": True,
+                "nocheckcertificate": True,
+                "quiet": True,
+                "no_warnings": True,
+                "prefer_ffmpeg": True,
+                "postprocessors": [
+                    {
+                        "key": "FFmpegExtractAudio",
+                        "preferredcodec": "mp3",
+                        "preferredquality": "192",
+                    }
+                ],
+            }
+            x = yt_dlp.YoutubeDL(ydl_optssx)
+            x.download([link])
+
+        if songvideo:
+            await loop.run_in_executor(None, song_video_dl)
+            fpath = f"downloads/{title}.mp4"
+            return fpath
+        elif songaudio:
+            await loop.run_in_executor(None, song_audio_dl)
+            fpath = f"downloads/{title}.mp3"
+            return fpath
+        elif video:
+            downloaded_file = await loop.run_in_executor(None, video_dl)
+            direct = None
+        else:
+            downloaded_file = await loop.run_in_executor(None, audio_dl)
+            direct = None
+        return downloaded_file, direct
