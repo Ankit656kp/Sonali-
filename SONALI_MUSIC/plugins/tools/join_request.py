@@ -1,7 +1,6 @@
 from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from utils.join_helper import is_admin
-
+from SONALI_MUSIC.utils.join_helper import is_admin
 
 @Client.on_chat_join_request()
 async def join_request_handler(client, request):
